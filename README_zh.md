@@ -27,7 +27,7 @@
 当前代码里保留的站点适配：
 - [QQ音乐](https://y.qq.com/)
 - [网易云音乐](https://music.163.com/)
-- [酷我](httsp://kuwo.cn)
+- [酷我](https://kuwo.cn)
 - [酷狗](https://kugou.com)
 - [咪咕音乐](https://music.migu.cn/)
 - [Musicbed](https://musicbed.com/)
