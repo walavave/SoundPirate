@@ -5,12 +5,12 @@ const CLASS_TO_LEFT  = "__sound-pirate-to-left"
 const CLASS_DOWNLOAD = "__sound-pirate-download"
 const CLASS_TO_RIGHT = "__sound-pirate-to-right"
 
-const IMG_MP3   = chrome.extension.getURL("img/music32.png");
-const IMG_AAC   = chrome.extension.getURL("img/aac32.png");
-const IMG_M4A   = chrome.extension.getURL("img/m4a32.png");
-const IMG_MP4   = chrome.extension.getURL("img/mp432.png");
-const IMG_LEFT  = chrome.extension.getURL("img/arrowl32.png");
-const IMG_RIGHT = chrome.extension.getURL("img/arrowr32.png");
+const IMG_MP3   = chrome.runtime.getURL("img/music32.png");
+const IMG_AAC   = chrome.runtime.getURL("img/aac32.png");
+const IMG_M4A   = chrome.runtime.getURL("img/m4a32.png");
+const IMG_MP4   = chrome.runtime.getURL("img/mp432.png");
+const IMG_LEFT  = chrome.runtime.getURL("img/arrowl32.png");
+const IMG_RIGHT = chrome.runtime.getURL("img/arrowr32.png");
 
 let pirateDiv = null
 let downLoadA = null

@@ -1,6 +1,7 @@
 const webpack = require("webpack"),
     path = require("path"),
     fileSystem = require("fs"),
+    sass = require("sass"),
     env = require("./utils/env"),
     CleanWebpackPlugin = require("clean-webpack-plugin"),
     CopyWebpackPlugin = require("copy-webpack-plugin"),
@@ -50,6 +51,7 @@ var options = {
             {
                 loader: 'sass-loader', // Loads a Sass/SCSS file and compiles it to CSS
                 options: {
+                    implementation: sass,
                     sourceMap: false,
                     // includePaths: [dirAssets]
                 }
@@ -108,7 +110,7 @@ var options = {
 };
 
 if (env.NODE_ENV === "development") {
-  options.devtool = "cheap-module-eval-source-map";
+  options.devtool = "cheap-source-map";
 }
 
 module.exports = options;

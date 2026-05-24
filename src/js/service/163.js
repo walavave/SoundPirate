@@ -2,17 +2,45 @@ import { addMessageListener } from '../browser'
 import { newSound } from '../page/link'
 import { setLatestSoundName, downloadLatestSound } from '../backgroundAction/soundInfo'
 
-const REGEX = /^https:\/\/music\.163\.com(\/|(\/.+)?)$/mg
+const NETEASE_HOST = 'music.163.com'
 
 function shouldHandle() {
-    return REGEX.test(window.location.href)
+    return window.location.hostname === NETEASE_HOST
+}
+
+function getDocumentCandidates() {
+    const docs = [document]
+    const iframe = document.querySelector('#g_iframe')
+
+    if (iframe && iframe.contentDocument) {
+        docs.unshift(iframe.contentDocument)
+    }
+
+    return docs
+}
+
+function getSongName() {
+    for (const doc of getDocumentCandidates()) {
+        const songName = doc.querySelector('.play .name, .m-playbar .head + .words .name, .tit .f-ff2')
+        const artistName = doc.querySelector('.play .by, .m-playbar .head + .words .by, .des .s-fc4')
+
+        if (songName && artistName) {
+            return `${songName.innerText.trim()} - ${artistName.innerText.trim()}`
+        }
+
+        if (songName) {
+            return songName.innerText.trim()
+        }
+    }
+
+    return document.title.replace(/\s*-\s*网易云音乐\s*$/, '').trim() || 'netease-audio'
 }
 
 function pageAction() {
     const handle = shouldHandle()
     if (handle) {
         addMessageListener((info) => {
-            const name = document.querySelector('.play .name').innerText + ' - ' + document.querySelector('.play .by').innerText
+            const name = getSongName()
             setLatestSoundName(name + '.' + info.soundFormat)
             newSound({
                 name,
